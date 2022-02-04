@@ -11,6 +11,7 @@ export class TrackModel implements ITrack {
   public order: number;
   public volume: number = 1; // default to full volume
   public solo: boolean;
+
   constructor(model?: any) {
     if (model) {
       for (let key in model) {

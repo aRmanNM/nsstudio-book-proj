@@ -1,9 +1,10 @@
-<ListView [items]="playerService.tracks" >
-    <ng-template let-track="item">
-      <GridLayout rows="auto" columns="75,*,100">
-          <Button text="Record" (tap)="record(track)" row="0" col="0"></Button>
-          <Label [text]="track.name" row="0" col="1"></Label>
-          <Switch [checked]="track.solo" row="0" col="2"></Switch>
-      </GridLayout>
-    </ng-template>
+<ListView [items]="playerService.tracks">
+  <ng-template let-item="item">
+    <Label text="test" textWrap="true"></Label>
+    <GridLayout rows="auto" columns="75,*,100">
+      <Button text="Record" (tap)="record(track)" row="0" col="0"></Button>
+      <Label [text]="item.name" row="0" col="1"></Label>
+      <Switch [checked]="item.solo" row="0" col="2"></Switch>
+    </GridLayout>
+  </ng-template>
 </ListView>

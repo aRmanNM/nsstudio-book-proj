@@ -1,9 +1,9 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
-import { NativeScriptModule } from "@nativescript/angular";
 import { PROVIDERS } from "../player/services";
+import { SharedModule } from '../shared/shared.module'
 
 @NgModule({
-  imports: [NativeScriptModule],
+  imports: [SharedModule],
   exports: [],
   declarations: [],
   providers: [...PROVIDERS],

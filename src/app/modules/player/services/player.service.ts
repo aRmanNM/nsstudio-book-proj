@@ -8,8 +8,8 @@ export class PlayerService {
 
   constructor() {
     this.tracks = [
-      {name: "Drums"},
-      {name: "Bass Guitar"},
+      { name: "Drums", solo: false },
+      { name: "Bass Guitar", solo: false },
     ];
   }
 

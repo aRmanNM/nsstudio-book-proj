@@ -1,9 +1,10 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
-import { PIPES } from './pipes'
+import { NativeScriptCommonModule } from "@nativescript/angular";
+import { PIPES } from "./pipes";
 
 @NgModule({
-  imports: [],
-  exports: [...PIPES],
+  imports: [NativeScriptCommonModule],
+  exports: [NativeScriptCommonModule, ...PIPES],
   declarations: [...PIPES],
   providers: [],
   schemas: [NO_ERRORS_SCHEMA],

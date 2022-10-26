@@ -6,6 +6,12 @@ import { MixerComponent } from "./components/mixer.component";
 
 import { PlayerModule } from "../player/player.module";
 import { NativeScriptRouterModule } from "@nativescript/angular";
+import { SharedModule } from "../shared/shared.module";
+
+const COMPONENTS: any[] = [
+  BaseComponent,
+  MixerComponent
+]
 
 const routes: Routes = [
   {
@@ -21,9 +27,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [PlayerModule, NativeScriptRouterModule.forChild(routes)],
+  imports: [PlayerModule, SharedModule, NativeScriptRouterModule.forChild(routes)],
   exports: [],
-  declarations: [BaseComponent, MixerComponent],
+  declarations: [...COMPONENTS],
   providers: [],
   schemas: [NO_ERRORS_SCHEMA],
 })

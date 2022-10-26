@@ -6,5 +6,5 @@ import { AuthService } from "./modules/core/services";
   templateUrl: "./app.component.html",
 })
 export class AppComponent {
-  constructor(private authService: AuthService) {}
+  constructor() {}
 }

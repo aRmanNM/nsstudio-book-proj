@@ -1,10 +1,10 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
-import { NativeScriptCommonModule } from "@nativescript/angular";
+import { NativeScriptCommonModule, NativeScriptRouterModule } from "@nativescript/angular";
 import { PIPES } from "./pipes";
 
 @NgModule({
-  imports: [NativeScriptCommonModule],
-  exports: [NativeScriptCommonModule, ...PIPES],
+  imports: [NativeScriptCommonModule, NativeScriptRouterModule],
+  exports: [NativeScriptCommonModule, NativeScriptRouterModule, ...PIPES],
   declarations: [...PIPES],
   providers: [],
   schemas: [NO_ERRORS_SCHEMA],

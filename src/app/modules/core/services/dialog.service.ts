@@ -1,27 +1,35 @@
 import { Injectable } from "@angular/core";
-import * as dialogs from "@nativescript/core/ui/dialogs";
+import { Dialogs, PromptOptions } from "@nativescript/core";
 
 @Injectable()
 export class DialogService {
   constructor() {}
 
   alert(msg: string) {
-    return dialogs.alert(msg);
+    return Dialogs.alert(msg);
   }
 
   confirm(msg: string) {
-    return dialogs.confirm(msg);
+    return Dialogs.confirm(msg);
   }
 
   prompt(msg: string, defaultText?: string) {
-    return dialogs.prompt(msg, defaultText);
+    let options: PromptOptions = {
+      message: msg,
+      defaultText,
+      okButtonText: "OK",
+      cancelButtonText: "Cancel",
+      theme: 0,
+    };
+
+    return Dialogs.prompt(options);
   }
 
   login(msg: string, userName?: string, password?: string) {
-    return dialogs.login(msg, userName, password);
+    return Dialogs.login(msg, userName, password);
   }
 
   action(msg: string, cancelButtonText?: string, actions?: string[]) {
-    return dialogs.action(msg, cancelButtonText, actions);
+    return Dialogs.action(msg, cancelButtonText, actions);
   }
 }

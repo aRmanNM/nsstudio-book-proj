@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ITrack } from "~/app/modules/core/models/track.model";
 import {
   AuthService,
@@ -12,6 +12,8 @@ import { PlayerService } from "../../services";
   templateUrl: "track-list.component.html",
 })
 export class TrackListComponent implements OnInit {
+  @Input() tracks: Array<ITrack>;
+
   constructor(
     private logService: LogService,
     public playerService: PlayerService,

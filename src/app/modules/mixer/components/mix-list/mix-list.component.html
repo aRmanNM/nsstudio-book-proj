@@ -1,0 +1,31 @@
+<ActionBar title="Compositions">
+  <ActionItem (tap)="mixerService.add()">
+    <Button text="New"></Button>
+  </ActionItem>
+</ActionBar>
+
+<ListView [items]="mixerService.list | orderBy: 'order'">
+  <ng-template let-composition="item">
+    <GridLayout rows="auto" columns="100,*,auto">
+      <Button
+        text="Edit"
+        row="0"
+        col="0"
+        (tap)="mixerService.edit(composition)"
+      ></Button>
+      <Label
+        [text]="composition.name"
+        [nsRouterLink]="['/mixer', composition.id]"
+        class="h2"
+        row="0"
+        col="1"
+      ></Label>
+      <Label
+        [text]="composition.tracks.length"
+        class="text-right"
+        row="0"
+        col="2"
+      ></Label>
+    </GridLayout>
+  </ng-template>
+</ListView>

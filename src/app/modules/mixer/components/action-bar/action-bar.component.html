@@ -1,0 +1,24 @@
+<ActionBar class="action-bar">
+  <GridLayout rows="auto" columns="auto,*,auto" class="action-bar">
+    <button
+      text="List"
+      nsRouterLink="/mixer/home"
+      class="action-item"
+      row="0"
+      col="0"
+    ></button>
+    <label
+      [text]="title"
+      class="action-bar-title text-center"
+      row="0"
+      col="1"
+    ></label>
+    <button
+      text="Record"
+      nsRouterLink="/record"
+      class="action-item"
+      row="0"
+      col="2"
+    ></button>
+  </GridLayout>
+</ActionBar>

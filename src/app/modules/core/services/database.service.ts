@@ -4,12 +4,14 @@ import { ApplicationSettings } from "@nativescript/core";
 
 interface IKeys {
   currentUser: string;
+  compositions: string;
 }
 
 @Injectable()
 export class DatabaseService {
   static KEYS: IKeys = {
     currentUser: "current-user",
+    compositions: "compositions"
   };
 
   setItem(key: string, value: any): void {

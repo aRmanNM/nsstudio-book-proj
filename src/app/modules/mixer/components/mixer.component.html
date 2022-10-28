@@ -2,5 +2,5 @@
 
 <GridLayout rows="*, 100" columns="*">
   <track-list [tracks]="composition.tracks" row="0" col="0"></track-list>
-  <player-controls row="1" col="0"></player-controls>
+  <player-controls [composition]="composition" row="1" col="0"></player-controls>
 </GridLayout>

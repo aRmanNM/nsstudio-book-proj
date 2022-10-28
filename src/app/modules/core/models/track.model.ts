@@ -1,4 +1,5 @@
 export interface ITrack {
+  id: number;
   filepath?: string;
   name?: string;
   order?: number;
@@ -6,6 +7,7 @@ export interface ITrack {
   solo?: boolean;
 }
 export class TrackModel implements ITrack {
+  public id: number
   public filepath: string;
   public name: string;
   public order: number;

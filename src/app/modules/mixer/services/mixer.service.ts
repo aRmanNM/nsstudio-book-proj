@@ -60,14 +60,18 @@ export class MixerService {
         order: 0,
         tracks: [
           {
-            name: "Guitar",
+            id: 1,
+            name: "Drums",
             order: 0,
             solo: false,
+            filepath: '~/assets/audio/drums.mp3'
           },
           {
-            name: "Vocals",
+            id: 2,
+            name: "Guitar",
             order: 1,
             solo: false,
+            filepath: '~/assets/audio/guitar.mp3'
           },
         ],
       },

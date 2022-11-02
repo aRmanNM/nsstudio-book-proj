@@ -18,6 +18,7 @@ export class PlayerControlsComponent implements OnInit, OnDestroy {
   private _subPlaying: Subscription;
   private _subDuration: Subscription;
   private _subCurrentTime: Subscription;
+  private _subComplete: Subscription;
 
   constructor(
     private logService: LogService,
@@ -36,10 +37,19 @@ export class PlayerControlsComponent implements OnInit, OnDestroy {
     if (this._subPlaying) {
       this._subPlaying.unsubscribe();
     }
+
+    if (this._subComplete) {
+      this._subComplete.unsubscribe();
+    }
   }
 
   ngOnInit() {
     this.playerService.composition = this.composition;
+
+    this._subComplete = this.playerService.complete$.subscribe((_) => {
+      this.currentTime = 0;
+    });
+
     this._subPlaying = this.playerService.playing$.subscribe(
       (playing: boolean) => {
         this._updateStatus(playing);

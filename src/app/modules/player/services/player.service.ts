@@ -1,12 +1,17 @@
-import { Injectable } from "@angular/core";
+import { Injectable, NgZone } from "@angular/core";
 import { Observable, Subject, interval, map } from "rxjs";
-import { CompositionModel, TrackPlayerModel } from "../../core/models";
+import {
+  CompositionModel,
+  IPlayerError,
+  TrackPlayerModel,
+} from "../../core/models";
 import { ITrack } from "../../core/models/track.model";
 
 @Injectable()
 export class PlayerService {
   public playing$: Subject<boolean> = new Subject();
   public duration$: Subject<number> = new Subject();
+  public complete$: Subject<number> = new Subject();
   public currentTime$: Observable<number>;
 
   private _composition: CompositionModel;
@@ -16,7 +21,7 @@ export class PlayerService {
 
   tracks: Array<ITrack>;
 
-  constructor() {
+  constructor(private ngZone: NgZone) {
     this.currentTime$ = interval(1000).pipe(
       map((_) =>
         this._longestTrack ? this._longestTrack.player.currentTime : 0
@@ -45,15 +50,21 @@ export class PlayerService {
     let initTrackPlayer = (index: number) => {
       let track = this._composition.tracks[index];
       let trackPlayer = new TrackPlayerModel();
-      trackPlayer.load(track).then((_) => {
-        this._trackPlayers.push(trackPlayer);
-        index++;
-        if (index < this._composition.tracks.length) {
-          initTrackPlayer(index);
-        } else {
-          this._updateTotalDuration();
-        }
-      });
+      trackPlayer
+        .load(
+          track,
+          this._trackComplete.bind(this),
+          this._trackError.bind(this)
+        )
+        .then((_) => {
+          this._trackPlayers.push(trackPlayer);
+          index++;
+          if (index < this._composition.tracks.length) {
+            initTrackPlayer(index);
+          } else {
+            this._updateTotalDuration();
+          }
+        });
     };
 
     initTrackPlayer(0);
@@ -98,6 +109,19 @@ export class PlayerService {
     }
 
     this._trackPlayers = [];
+  }
+
+  private _trackComplete(trackId: number) {
+    console.log("trackComplete: ", trackId);
+    // Read this: https://blog.thoughtram.io/angular/2016/02/01/zones-in-angular-2.html
+    this.ngZone.run(() => {
+      this.playing = false;
+      this.complete$.next(trackId);
+    });
+  }
+
+  private _trackError(playerError: IPlayerError) {
+    console.log(`trackId ${playerError.trackId} error: ${playerError.error}`);
   }
 
   // addTrack(track: ITrack): void {
